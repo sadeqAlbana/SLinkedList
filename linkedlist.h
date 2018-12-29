@@ -2,6 +2,7 @@
 #define LINKEDLIST_H
 
 #include <iostream>
+#include <assert.h>
 template<class T>
 struct Node
 {
@@ -22,7 +23,7 @@ public:
     Node<T> *allocNode(T data);
     void append(T data);
     T at(int pos);
-    int size(){return _size;};
+    int size(){return _size;}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
 
@@ -68,8 +69,7 @@ void LinkedList<T>::append(T data)
 template<class T>
 T LinkedList<T>::at(int pos)
 {
-    if(pos>=size())
-        return T();
+    assert(pos<size());
 
     auto tmp=first;
     for(int i=0; i<pos; i++)

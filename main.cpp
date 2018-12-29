@@ -12,7 +12,6 @@ int main()
 
 
     std::cout << list;
-
-    std::cout <<list.at(4) <<std::endl;
+    int a=list.at(14);
     return 0;
 }
