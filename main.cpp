@@ -14,7 +14,7 @@ int main()
     std::cout << list;
 
 
-    list.insert(4,55);
+    list.insert(1,55);
 
     std::cout << list;
     return 0;
