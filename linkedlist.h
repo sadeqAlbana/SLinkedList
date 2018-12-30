@@ -22,7 +22,7 @@ public:
     Node<T> *allocNode(const T &value);
     void append(const T &value);
     const T &at(const int &pos) const;
-    void insert(const int &before);
+    void insert(const int &before, const T &value);
     int size(){return _size;}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
@@ -64,6 +64,7 @@ void LinkedList<T>::append(const T &value)
             tmp=tmp->next;
 
         tmp->next=newNode;
+        newNode->prev=tmp;
     }
 }
 template<class T>
@@ -81,13 +82,26 @@ const T& LinkedList<T>::at(const int &pos) const
 }
 
 template<class T>
-void LinkedList<T>::insert(const int &before)
+void LinkedList<T>::insert(const int &before,const T &value)
 {
-//    auto tmp=first;
-//    for(int i=0; i<pos; i++)
-//    {
-//        tmp=tmp->next;
-//    }
+    assert(before<size());
+
+    auto newNode=allocNode(value);
+
+    auto tmp=first;
+
+    for(int i=0; i<before; i++)
+        tmp=tmp->next;
+
+
+    if(tmp->prev) //if tmp->prev is not empty then prev is not the first node
+        tmp->prev->next=newNode;
+    else
+        first=newNode;
+
+    newNode->next=tmp;
+    newNode->prev=tmp->prev;
+    tmp->prev=newNode;
 }
 template<class C>
 std::ostream& operator<< (std::ostream& os, const LinkedList<C> &list) {

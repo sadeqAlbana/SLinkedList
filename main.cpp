@@ -6,10 +6,15 @@ int main()
 {
     LinkedList<int> list;
 
-    list.append(1);
-    list.append(2);
+    list.append(11);
+    list.append(22);
     list.append(19);
+    list.append(66);
 
+    std::cout << list;
+
+
+    list.insert(4,55);
 
     std::cout << list;
     return 0;
