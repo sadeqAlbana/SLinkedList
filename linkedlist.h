@@ -19,7 +19,6 @@ class LinkedList
 {
 public:
     LinkedList();
-
     Node<T> *allocNode(const T &value);
     void append(const T &value);
     const T &at(const int &pos) const;
@@ -89,19 +88,19 @@ void LinkedList<T>::insert(const int &before)
 //    {
 //        tmp=tmp->next;
 //    }
-
 }
 template<class C>
 std::ostream& operator<< (std::ostream& os, const LinkedList<C> &list) {
 
     Node<int> *node=list.first;
+    os << "LinkedList: {";
     do
     {
-        os <<"data: "<<node->data << std::endl;
+        os<<node->data << ",";
         node=node->next;
     }
     while (node);
-
+    os << "\b}" << std::endl;
     return os;
 }
 
