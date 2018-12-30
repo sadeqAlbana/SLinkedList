@@ -7,6 +7,10 @@ template<class T>
 struct Node
 {
     Node(){}
+    ~Node()
+    {
+        //delete data;
+    }
     Node(T Data){data=Data;}
     Node<T> *next=nullptr;
     Node<T> *prev=nullptr;
@@ -24,12 +28,16 @@ public:
     const T &at(const int &pos) const;
     void insert(const int &before, const T &value);
     void replace(const int &index, const T &value);
-    int size(){return _size;}
+
+    void pop();
+    int size() const {return _size;}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
 
 private:
     inline void incSize(){++_size;}
+    inline void decSize(){--_size;}
+    void removeNode(Node<T> * node);
     Node<T> *first=nullptr;
     int _size=0;
 };
@@ -118,18 +126,53 @@ void LinkedList<T>::replace(const int &index, const T &value)
     tmp->data=value;
 
 }
-template<class C>
-std::ostream& operator<< (std::ostream& os, const LinkedList<C> &list) {
 
-    Node<int> *node=list.first;
-    os << "LinkedList: {";
-    do
+template<class T>
+void LinkedList<T>::pop()
+{
+    assert(size());
+
+    auto tmp=first;
+    while (tmp->next)
     {
-        os<<node->data << ",";
-        node=node->next;
+        tmp=tmp->next;
     }
-    while (node);
-    os << "\b}" << std::endl;
+
+   removeNode(tmp);
+}
+
+template<class T>
+void LinkedList<T>::removeNode(Node<T> *node)
+{
+    decSize();
+
+    if(node->prev)
+        node->prev->next=node->next;
+
+    if(node->next)
+        node->next->prev=node->prev;
+
+    if(node==first)
+        first=nullptr;
+
+    delete node;
+
+}
+template<class C>
+std::ostream& operator<< (std::ostream& os, const LinkedList<C> &list)
+{
+    auto *node=list.first;
+
+    os << "LinkedList: { ";
+    if(node){
+        do
+        {
+            os<<node->data << ",";
+            node=node->next;
+        }
+        while (node);
+    }
+    os << "\b }" << std::endl;
     return os;
 }
 

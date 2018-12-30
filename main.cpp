@@ -14,10 +14,11 @@ int main()
     std::cout << list;
 
 
-    list.insert(3,55);
 
-    list.replace(0,999);
+    list.pop();
+    list.pop();
+    list.pop();
+    //list.pop();
 
-    std::cout << list;
     return 0;
 }
