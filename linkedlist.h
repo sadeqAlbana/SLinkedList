@@ -28,8 +28,9 @@ public:
     const T &at(const int &pos) const;
     void insert(const int &before, const T &value);
     void replace(const int &index, const T &value);
-
-    void pop();
+    void remove(const int &index);
+    void removeLast();
+    void removeFirst();
     int size() const {return _size;}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
@@ -128,7 +129,19 @@ void LinkedList<T>::replace(const int &index, const T &value)
 }
 
 template<class T>
-void LinkedList<T>::pop()
+void LinkedList<T>::remove(const int &index)
+{
+    assert(index<size());
+    auto tmp=first;
+
+    for(int i=0; i<index; i++)
+        tmp=tmp->next;
+
+    removeNode(tmp);
+}
+
+template<class T>
+void LinkedList<T>::removeLast()
 {
     assert(size());
 
@@ -138,7 +151,14 @@ void LinkedList<T>::pop()
         tmp=tmp->next;
     }
 
-   removeNode(tmp);
+    removeNode(tmp);
+}
+
+template<class T>
+void LinkedList<T>::removeFirst()
+{
+    assert(size());
+    removeNode(first);
 }
 
 template<class T>
@@ -153,7 +173,12 @@ void LinkedList<T>::removeNode(Node<T> *node)
         node->next->prev=node->prev;
 
     if(node==first)
-        first=nullptr;
+    {
+        if(size())
+            first=node->next;
+        else
+            first=nullptr;
+    }
 
     delete node;
 

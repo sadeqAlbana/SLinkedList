@@ -15,10 +15,9 @@ int main()
 
 
 
-    list.pop();
-    list.pop();
-    list.pop();
-    //list.pop();
+    list.remove(0);
 
+
+    std::cout << list;
     return 0;
 }
