@@ -15,7 +15,7 @@ int main()
 
 
 
-    list.remove(0);
+    list.remove(3);
 
 
     std::cout << list;
