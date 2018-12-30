@@ -35,6 +35,8 @@ public:
     void removeLast();
     void removefirst();
     int size() const {return _size;}
+    int count() const {return size();}
+    int length() const {return size();}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
 
