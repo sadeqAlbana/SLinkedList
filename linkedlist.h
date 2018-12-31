@@ -37,6 +37,8 @@ public:
     int size() const {return _size;}
     int count() const {return size();}
     int length() const {return size();}
+    bool isEmpty(){return size();}
+    operator bool(){return isEmpty();}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
 
@@ -128,7 +130,10 @@ void LinkedList<T>::insert(const int &before,const T &value)
         _first=newNode;
     }
     else
+    {
         newNode->prev=tmp->prev;
+        newNode->prev->next=newNode;
+    }
 
     newNode->next=tmp;
     tmp->prev=newNode;

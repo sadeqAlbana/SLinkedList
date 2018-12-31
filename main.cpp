@@ -10,7 +10,7 @@ int main()
 
     list.append(22);
     list.append(19);
-    list.insert(1,9994);
+    list.insert(0,9994);
     //list.append(25);
     //list.append(66);
 
