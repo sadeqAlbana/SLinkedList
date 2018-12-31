@@ -72,14 +72,20 @@ void LinkedList<T>::append(const T &value)
     auto newNode=allocNode(value);
     if(!_first)
     {
+        newNode->prev=newNode;
+        newNode->next=newNode;
         _first=newNode;
     }
     else
     {
         auto *tmp=getLastNode();
 
-        tmp->next=newNode;
+        //std::cout << std::endl << (tmp==_first) << std::endl;
+
+        _first->prev=newNode;
+        newNode->next=_first;
         newNode->prev=tmp;
+        tmp->next=newNode;
     }
 }
 template<class T>
@@ -115,14 +121,19 @@ void LinkedList<T>::insert(const int &before,const T &value)
     auto tmp=getNode(before);
 
 
-    if(tmp->prev) //if tmp->prev is not empty then prev is not the _first node
-        tmp->prev->next=newNode;
-    else
+    if(tmp->next==_first)
+    {
+        newNode->prev=tmp;
+        tmp->next=newNode;
         _first=newNode;
+    }
+    else
+        newNode->prev=tmp->prev;
 
     newNode->next=tmp;
-    newNode->prev=tmp->prev;
     tmp->prev=newNode;
+
+
 }
 
 template<class T>
@@ -194,11 +205,7 @@ Node<T> *LinkedList<T>::getNode(const int &pos) const
 template<class T>
 Node<T> *LinkedList<T>::getLastNode() const
 {
-    auto tmp=_first;
-    while (tmp->next)
-        tmp=tmp->next;
-
-    return tmp;
+    return _first->prev;
 }
 template<class C>
 std::ostream& operator<< (std::ostream& os, const LinkedList<C> &list)
@@ -212,7 +219,7 @@ std::ostream& operator<< (std::ostream& os, const LinkedList<C> &list)
             os<<node->data << ",";
             node=node->next;
         }
-        while (node);
+        while (node!=list._first);
     }
     os << "\b }" << std::endl;
     return os;
