@@ -6,13 +6,26 @@ int main()
 {
     LinkedList<int> list;
 
-    //list.append(11);
-    //list.append(22);
+    list.append(1);
 
-    list << 1 << 2 << 55 << 4;
-    std::cout << list;
+    list << 2;
 
-    cout << list[2];
+    list << 3 << 4 << 5 << 2323 << 4334;
+
+    list.insert(2,55);
+    list << 44;
+
+    list.remove(4);
+
+    list.append(2);
+
+    list.removeLast();
+    list.removefirst();
+
+    list[3]=599;
+    list.at(2)=444;
+
+    cout <<list;
 
 
     return 0;
