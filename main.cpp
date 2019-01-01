@@ -12,6 +12,8 @@ int main()
     list << 1 << 2 << 55 << 4;
     std::cout << list;
 
+    cout << list[2];
+
 
     return 0;
 }

@@ -24,7 +24,7 @@ class LinkedList
 public:
     LinkedList();
     const T &at(const int &pos) const;
-    T value(const int &pos) const;
+    T value(const int &pos) {return getNode(pos)->data;}
     const T &first() const;
     const T &last() const;
 
@@ -39,6 +39,7 @@ public:
     int length() const {return size();}
     bool isEmpty(){return size();}
     operator bool(){return isEmpty();}
+    T operator [](const int &pos){return value(pos);}
     LinkedList<T> & operator <<(const T &value){append(value); return *this;}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
@@ -82,9 +83,6 @@ void LinkedList<T>::append(const T &value)
     else
     {
         auto *tmp=getLastNode();
-
-        //std::cout << std::endl << (tmp==_first) << std::endl;
-
         _first->prev=newNode;
         newNode->next=_first;
         newNode->prev=tmp;
