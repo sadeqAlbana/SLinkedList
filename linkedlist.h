@@ -122,20 +122,12 @@ void LinkedList<T>::insert(const int &before,const T &value)
 
     auto tmp=getNode(before);
 
-
     if(tmp==_first)
-    {
         _first=newNode;
-        newNode->prev=tmp->prev;
-        newNode->next=tmp;
-        newNode->prev->next=newNode;
-    }
-    else
-    {
-        newNode->prev=tmp->prev;
-        newNode->next=tmp;
-        newNode->prev->next=newNode;
-    }
+
+    newNode->prev=tmp->prev;
+    newNode->next=tmp;
+    newNode->prev->next=newNode;
 
 }
 
