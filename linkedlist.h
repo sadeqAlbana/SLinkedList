@@ -39,6 +39,7 @@ public:
     int length() const {return size();}
     bool isEmpty(){return size();}
     operator bool(){return isEmpty();}
+    LinkedList<T> & operator <<(const T &value){append(value); return *this;}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
 
@@ -162,6 +163,7 @@ void LinkedList<T>::removefirst()
     assert(size());
     removeNode(_first);
 }
+
 
 template<class T>
 void LinkedList<T>::removeNode(Node<T> *node)

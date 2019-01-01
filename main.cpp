@@ -8,14 +8,9 @@ int main()
 
     //list.append(11);
     //list.append(22);
-    list.append(19);
-    //list.insert(1,9994);
-    list.append(25);
-    list.insert(1,9994);
-    //list.append(66);
+
+    list << 1 << 2 << 55 << 4;
     std::cout << list;
-    //list.remove(3);
-    //std::cout << list;
 
 
     return 0;
