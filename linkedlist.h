@@ -24,6 +24,7 @@ class LinkedList
 public:
     LinkedList();
     const T &at(const int &pos) const;
+    T &at(const int &pos);
     T value(const int &pos) {return getNode(pos)->data;}
     const T &first() const;
     const T &last() const;
@@ -39,7 +40,7 @@ public:
     int length() const {return size();}
     bool isEmpty(){return size();}
     operator bool(){return isEmpty();}
-    T operator [](const int &pos){return value(pos);}
+    T & operator [](const int &pos){return at(pos);}
     LinkedList<T> & operator <<(const T &value){append(value); return *this;}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
@@ -91,6 +92,15 @@ void LinkedList<T>::append(const T &value)
 }
 template<class T>
 const T& LinkedList<T>::at(const int &pos) const
+{
+    assert(pos<size());
+
+    auto tmp=getNode(pos);
+
+    return tmp->data;
+}
+template<class T>
+T& LinkedList<T>::at(const int &pos)
 {
     assert(pos<size());
 
