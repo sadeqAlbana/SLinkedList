@@ -1,10 +1,10 @@
 #include <iostream>
-#include "linkedlist.h"
+#include "slinkedlist.h"
 using namespace std;
 
 int main()
 {
-    LinkedList<int> list;
+    SLinkedList<int> list;
 
     list.append(1);
 

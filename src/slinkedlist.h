@@ -1,5 +1,5 @@
-#ifndef LINKEDLIST_H
-#define LINKEDLIST_H
+#ifndef SLINKEDLIST_H
+#define SLINKEDLIST_H
 
 #include <iostream>
 #include <assert.h>
@@ -7,10 +7,6 @@ template<class T>
 struct Node
 {
     Node(){}
-    ~Node()
-    {
-        //delete data;
-    }
     Node(T Data){data=Data;}
     Node<T> *next=nullptr;
     Node<T> *prev=nullptr;
@@ -19,10 +15,10 @@ struct Node
 
 
 template<class T>
-class LinkedList
+class SLinkedList
 {
 public:
-    LinkedList();
+    SLinkedList();
     const T &at(const int &pos) const;
     T& at(const int &pos);
     T value(const int &pos) {return getNode(pos)->data;}
@@ -31,19 +27,25 @@ public:
 
     void append(const T &value);
     void insert(const int &before, const T &value);
+
     void replace(const int &pos, const T &value);
+
     void remove(const int &pos);
     void removeLast();
     void removefirst();
+
     int size() const {return _size;}
     int count() const {return size();}
     int length() const {return size();}
+
     bool isEmpty(){return size();}
+
     operator bool(){return isEmpty();}
     T& operator [](const int &pos){return at(pos);}
-    LinkedList<T> & operator <<(const T &value){append(value); return *this;}
+    SLinkedList<T> & operator <<(const T &value){append(value); return *this;}
+
     template<class C>
-    friend std::ostream& operator<<(std::ostream& os, const LinkedList<C> &list);
+    friend std::ostream& operator<<(std::ostream& os, const SLinkedList<C> &list);
 
 private:
     Node<T> *allocNode(const T &value);
@@ -59,20 +61,20 @@ private:
 
 
 template <class T>
-LinkedList<T>::LinkedList()
+SLinkedList<T>::SLinkedList()
 {
 
 }
 
 template <class T>
-Node<T> *LinkedList<T>::allocNode(const T &value)
+Node<T> *SLinkedList<T>::allocNode(const T &value)
 {
     incSize();
     return new Node<T>(value);
 }
 
 template<class T>
-void LinkedList<T>::append(const T &value)
+void SLinkedList<T>::append(const T &value)
 {
     auto newNode=allocNode(value);
     if(!_first)
@@ -91,7 +93,7 @@ void LinkedList<T>::append(const T &value)
     }
 }
 template<class T>
-const T& LinkedList<T>::at(const int &pos) const
+const T& SLinkedList<T>::at(const int &pos) const
 {
     assert(pos<size());
 
@@ -100,7 +102,7 @@ const T& LinkedList<T>::at(const int &pos) const
     return tmp->data;
 }
 template<class T>
-T& LinkedList<T>::at(const int &pos)
+T& SLinkedList<T>::at(const int &pos)
 {
     assert(pos<size());
 
@@ -110,20 +112,20 @@ T& LinkedList<T>::at(const int &pos)
 }
 
 template<class T>
-const T &LinkedList<T>::first() const
+const T &SLinkedList<T>::first() const
 {
     assert(size());
     return _first->data;
 }
 
 template<class T>
-const T &LinkedList<T>::last() const
+const T &SLinkedList<T>::last() const
 {
     return getLastNode()->data;
 }
 
 template<class T>
-void LinkedList<T>::insert(const int &before,const T &value)
+void SLinkedList<T>::insert(const int &before,const T &value)
 {
     assert(before<size());
 
@@ -141,7 +143,7 @@ void LinkedList<T>::insert(const int &before,const T &value)
 }
 
 template<class T>
-void LinkedList<T>::replace(const int &pos, const T &value)
+void SLinkedList<T>::replace(const int &pos, const T &value)
 {
     assert(pos<size());
 
@@ -151,7 +153,7 @@ void LinkedList<T>::replace(const int &pos, const T &value)
 }
 
 template<class T>
-void LinkedList<T>::remove(const int &pos)
+void SLinkedList<T>::remove(const int &pos)
 {
     assert(pos<size());
 
@@ -159,14 +161,14 @@ void LinkedList<T>::remove(const int &pos)
 }
 
 template<class T>
-void LinkedList<T>::removeLast()
+void SLinkedList<T>::removeLast()
 {
     assert(size());
     removeNode(getLastNode());
 }
 
 template<class T>
-void LinkedList<T>::removefirst()
+void SLinkedList<T>::removefirst()
 {
     assert(size());
     removeNode(_first);
@@ -174,7 +176,7 @@ void LinkedList<T>::removefirst()
 
 
 template<class T>
-void LinkedList<T>::removeNode(Node<T> *node)
+void SLinkedList<T>::removeNode(Node<T> *node)
 {
     decSize();
 
@@ -197,7 +199,7 @@ void LinkedList<T>::removeNode(Node<T> *node)
 }
 
 template<class T>
-Node<T> *LinkedList<T>::getNode(const int &pos) const
+Node<T> *SLinkedList<T>::getNode(const int &pos) const
 {
     auto tmp=_first;
 
@@ -208,16 +210,16 @@ Node<T> *LinkedList<T>::getNode(const int &pos) const
 }
 
 template<class T>
-Node<T> *LinkedList<T>::getLastNode() const
+Node<T> *SLinkedList<T>::getLastNode() const
 {
     return _first->prev;
 }
 template<class C>
-std::ostream& operator<< (std::ostream& os, const LinkedList<C> &list)
+std::ostream& operator<< (std::ostream& os, const SLinkedList<C> &list)
 {
     auto *node=list._first;
 
-    os << "LinkedList: { ";
+    os << "SLinkedList: { ";
     if(node){
         do
         {
@@ -231,4 +233,4 @@ std::ostream& operator<< (std::ostream& os, const LinkedList<C> &list)
 }
 
 
-#endif // LINKEDLIST_H
+#endif // SLINKEDLIST_H
