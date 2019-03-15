@@ -1,8 +1,9 @@
 #ifndef SLINKEDLIST_H
 #define SLINKEDLIST_H
-
 #include <iostream>
 #include <assert.h>
+
+
 template<class T>
 struct Node
 {
@@ -57,7 +58,6 @@ private:
     Node<T> *_first=nullptr;
     int _size=0;
 };
-
 
 
 template <class T>
@@ -149,7 +149,6 @@ void SLinkedList<T>::replace(const int &pos, const T &value)
 
     auto tmp=getNode(pos);
     tmp->data=value;
-
 }
 
 template<class T>
@@ -195,7 +194,6 @@ void SLinkedList<T>::removeNode(Node<T> *node)
     }
 
     delete node;
-
 }
 
 template<class T>
