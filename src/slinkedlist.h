@@ -97,18 +97,14 @@ const T& SLinkedList<T>::at(const int &pos) const
 {
     assert(pos<size());
 
-    auto tmp=getNode(pos);
-
-    return tmp->data;
+    return getNode(pos)->data;
 }
 template<class T>
 T& SLinkedList<T>::at(const int &pos)
 {
     assert(pos<size());
 
-    auto tmp=getNode(pos);
-
-    return tmp->data;
+    return getNode(pos)->data;
 }
 
 template<class T>
@@ -163,6 +159,7 @@ template<class T>
 void SLinkedList<T>::removeLast()
 {
     assert(size());
+
     removeNode(getLastNode());
 }
 
