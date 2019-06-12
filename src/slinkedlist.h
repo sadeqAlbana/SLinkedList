@@ -20,31 +20,39 @@ class SLinkedList
 {
 public:
     SLinkedList();
+
+    //getters
     const T &at(const int &pos) const;
     T& at(const int &pos);
     T value(const int &pos) {return getNode(pos)->data;}
     const T &first() const;
     const T &last() const;
 
+    //add
     void append(const T &value);
+    void prepend(const T &value);
     void insert(const int &before, const T &value);
 
     void replace(const int &pos, const T &value);
 
+    //remove
     void remove(const int &pos);
     void removeLast();
     void removefirst();
 
+
+    // stat
     int size() const {return _size;}
     int count() const {return size();}
     int length() const {return size();}
-
     bool isEmpty(){return size();}
 
+
+    //operators
     operator bool(){return isEmpty();}
     T& operator [](const int &pos){return at(pos);}
     SLinkedList<T> & operator <<(const T &value){append(value); return *this;}
-
+    SLinkedList<T> & operator +=(const T &value) {append(value); return *this;}
     template<class C>
     friend std::ostream& operator<<(std::ostream& os, const SLinkedList<C> &list);
 
@@ -90,6 +98,27 @@ void SLinkedList<T>::append(const T &value)
         newNode->next=_first;
         newNode->prev=tmp;
         tmp->next=newNode;
+    }
+}
+
+template<class T>
+void SLinkedList<T>::prepend(const T &value)
+{
+    auto newNode=allocNode(value);
+    if(!_first)
+    {
+        newNode->prev=newNode;
+        newNode->next=newNode;
+        _first=newNode;
+    }
+    else
+    {
+        auto last=getLastNode();
+        newNode->next=_first;
+        newNode->prev=last;
+        _first->prev=newNode;
+        last->next=newNode;
+        _first=newNode;
     }
 }
 template<class T>
